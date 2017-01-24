@@ -16,12 +16,10 @@
     "ramda": "^0.23.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.17.31",
     "@types/hapi": "^13.0.38",
     "@types/node": "^7.0.1",
     "@types/ramda": "0.0.3",
     "@types/typescript": "^2.0.0",
-    "cheerio": "^0.22.0",
     "nodemon": "^1.11.0",
     "ts-node": "^2.0.0",
     "typescript": "^2.1.5"

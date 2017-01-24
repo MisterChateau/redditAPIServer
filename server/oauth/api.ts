@@ -18,25 +18,19 @@ export const routeAuthCallbackConfig = {
 } as Hapi.IRouteConfiguration
 
 function redirectHandler(request, reply: Hapi.IReply) {
-    console.log("sup")
     const url = `https://${env.oauth.baseUrl}authorize?client_id=${env.oauth.clientId}&response_type=code&state=fuckit&redirect_uri=http://${env.server.ip}:${env.server.port}/auth/callback&scope=mysubreddits`
     reply.redirect(url)
 }
-console.log(basic(env.oauth.clientId, env.oauth.secret))
+
 function callbackHandler(request: Hapi.Request, reply) {
-        fetch(`https://${env.oauth.baseUrl}access_token`, {
+    fetch(`https://${env.oauth.baseUrl}access_token`, {
         method: 'POST',
         headers: { Authorization: basic(env.oauth.clientId, env.oauth.secret) },
-        body: { 
-            grant_type: 'authorization_code', 
-            code: request.query.code,
-            redirect_uri: `http://${env.server.ip}:${env.server.port}/auth/callback`}
-        })
-        .then((res) => res)
-        .then((res) => {
-            reply(res.body);
-        })
-        .catch((err => reply(err.message)))
+        body: `grant_type=authorization_code&code=${request.query.code}&redirect_uri=http://${env.server.ip}:${env.server.port}/auth/callback`
+    })
+    .then((res) => res.json())
+    .then((token) => reply(token))
+    .catch((err => reply(err.message)))
 }
 
 export function handleAuthenticationHeader (request: Hapi.Request, reply: Hapi.IReply) {
