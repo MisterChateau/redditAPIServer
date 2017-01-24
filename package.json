@@ -10,8 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node-fetch": "^1.6.7",
-    "@types/ramda": "0.0.3",
+    "basic-authorization-header": "^0.2.7",
     "hapi": "^16.1.0",
     "node-fetch": "^1.6.3",
     "ramda": "^0.23.0"
